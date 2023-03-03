@@ -75,7 +75,8 @@ impl P2PConnection {
         //  the parsing logic needs to take the variable length encoded on the wire into account.
         //  -> maybe encode this as P2PMessage::try_parse(buf)?
         if self.read_buf_pointer >= 100 {
-            let result = P2PMessage { payload: self.read_buf[0..100].into() };
+            let result = P2PMessage { payload: self.read_buf[0..100].to_vec() };
+            (&self.read_buf[0..self.read_buf_pointer]).copy_within(100, 0);
             self.read_buf_pointer -= 100;
             Some(result)
         }
