@@ -71,7 +71,9 @@ impl P2PConnection {
     }
 
     fn message_from_buffer(&mut self) -> Option<P2PMessage> {
-        //TODO message parsing logic goes here
+        //TODO message parsing logic goes here. The hard-coded length of 100 is of course nonsense,
+        //  the parsing logic needs to take the variable length encoded on the wire into account.
+        //  -> maybe encode this as P2PMessage::try_parse(buf)?
         if self.read_buf_pointer >= 100 {
             let result = P2PMessage { payload: self.read_buf[0..100].into() };
             self.read_buf_pointer -= 100;
@@ -83,6 +85,7 @@ impl P2PConnection {
     }
 }
 
+//TODO make this an enum with the different kinds of message, parsing logic etc.
 pub struct P2PMessage {
     //TODO protocol specific headers etc.
     pub payload: Vec<u8>

@@ -32,6 +32,7 @@ impl From<&str> for P2PError {
 
 #[derive(Debug, Clone)]
 pub enum P2PProtocolVersion {
+    //TODO arbitrary version numbers to illustrate protocol version negotiation
     V1,
     V2,
 }
