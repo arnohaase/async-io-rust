@@ -1,0 +1,11 @@
+[package]
+name = "client-main"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+log = "0"
+p2p = { path = "../p2p" }
+simple_logger = "4"
+tokio = { version="1", features=["full"] }
